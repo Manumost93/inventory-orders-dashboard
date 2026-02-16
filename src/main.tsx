@@ -3,8 +3,6 @@
 // Year: 2026
 
 
-
-
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import AppRouter from "./app/routes/AppRouter";
