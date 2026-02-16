@@ -103,11 +103,13 @@ This project was built as a portfolio project to demonstrate frontend architectu
 
 ## 👨‍💻 Author
 
-**Your Name Here**  
+**Manuel Honrado**  
 Frontend Developer  
 
-LinkedIn: https://linkedin.com/in/yourprofile  
-GitHub: https://github.com/yourusername  
+LinkedIn: www.linkedin.com/in/manuel-honrado-desarrollador
+GitHub: https://github.com/Manumost93/inventory-orders-dashboard.git
+Live demo: https://inventory-dashboard.vercel.app
+
 
 ## 📅 Year
 
