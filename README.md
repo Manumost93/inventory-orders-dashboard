@@ -108,8 +108,7 @@ Frontend Developer
 
 LinkedIn: www.linkedin.com/in/manuel-honrado-desarrollador
 GitHub: https://github.com/Manumost93/inventory-orders-dashboard.git
-Live demo: https://inventory-dashboard.vercel.app
-
+Live demo: https://inventory-orders-dashboard.vercel.app
 
 ## 📅 Year
 
