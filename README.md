@@ -14,17 +14,32 @@
 
 ## 📷 Capturas de pantalla
 
+> 📝 **Instrucciones para añadir imágenes**: Guarda tus 3 capturas de pantalla en `docs/images/` con estos nombres exactos:
+> - `dashboard-overview.png` - Captura del dashboard principal
+> - `products-management.png` - Vista de la página de productos  
+> - `add-product-modal.png` - Modal para añadir producto
+
 ### Dashboard Principal
-![Dashboard Principal](./docs/images/dashboard-overview.png)
-*Vista general del dashboard con métricas de negocio, gráficos de órdenes y snapshot del inventario*
+**Vista general del dashboard con métricas de negocio, gráficos de órdenes y snapshot del inventario**
+- Métricas de ingresos totales ($459.40)
+- Contador de órdenes por estado (3 órdenes)
+- Productos activos en inventario (2 productos)
+- Alertas de stock bajo (5 productos)
+- Top customer (Initech - $360.00)
+- Últimas 5 órdenes con detalles
 
 ### Gestión de Productos
-![Gestión de Productos](./docs/images/products-management.png)
-*Módulo de gestión de productos con tabla filtrable y funcionalidades CRUD*
+**Módulo de gestión de productos con tabla filtrable y funcionalidades CRUD**
+- Tabla con productos: Classic Burger, Cheese Burger, Vegan Burger
+- Filtros por estado y búsqueda por nombre
+- Botón "ADD PRODUCT" para crear nuevos productos
+- Columnas: Name, SKU, Price, Stock, Status, Created At, Actions
 
-### Módulo de Creación
-![Añadir Producto](./docs/images/add-product-modal.png)
-*Modal para añadir nuevos productos al inventario*
+### Módulo de Creación  
+**Modal para añadir nuevos productos al inventario**
+- Formulario con campos "Product Name" y "Price"
+- Botones "CANCEL" y "CREATE"
+- Validación de datos de entrada
 
 ---
 
