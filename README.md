@@ -72,11 +72,38 @@ El proyecto implementa un **sistema de gestión de datos robusto** con:
 
 ### 📡 API Simulada (LocalStorage)
 ```typescript
-// Servicios principales
-- ProductService: Gestión completa de productos
-- OrderService: Manejo de órdenes y estados  
-- CustomerService: Administración de clientes
-- Storage: Capa de persistencia local
+// === PRODUCT SERVICE ===
+export async function getProducts(): Promise<Product[]>
+export async function getProductById(id: string): Promise<Product | null>
+export async function createProduct(data: CreateProduct): Promise<Product>
+export async function updateProduct(id: string, data: Partial<Product>): Promise<Product>
+export async function deleteProduct(id: string): Promise<void>
+
+// === ORDER SERVICE ===
+export async function getOrders(): Promise<Order[]>
+export async function getOrderById(id: string): Promise<Order | null>
+export async function getOrdersByCustomerId(customerId: string): Promise<Order[]>
+export async function createOrder(data: CreateOrder): Promise<Order>
+export async function updateOrderStatus(id: string, status: OrderStatus): Promise<Order>
+
+// === CUSTOMER SERVICE ===
+export async function getCustomers(): Promise<Customer[]>
+export async function getCustomerById(id: string): Promise<Customer | null>
+export async function updateCustomer(id: string, data: Partial<Customer>): Promise<Customer>
+
+// === STORAGE SERVICE ===
+const STORAGE_KEYS = {
+  auth: "auth_v1",
+  products: "products_v1",
+  orders: "orders_v1",
+  customers: "customers_v1"
+} as const;
+
+export function readJson<T>(key: string, fallback: T): T
+export function writeJson<T>(key: string, value: T): void
+export function readAuth(): StoredAuth
+export function writeAuth(auth: StoredAuth): void
+export function clearAuth(): void
 ```
 
 ### 🔄 Arquitectura de Datos
@@ -116,18 +143,109 @@ interface Customer {
 - **Gestión de estado** con Context API
 - **Persistencia de sesión** automática
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Stack Tecnológico Completo
 
-| Categoría | Tecnologías |
-|-----------|-------------|
-| **Frontend** | React 19.2, TypeScript 5.9 |
-| **UI Framework** | Material-UI v7 (MUI) |
-| **Routing** | React Router v7 |
-| **Estado Global** | Context API + useReducer |
-| **Build Tool** | Vite 6.0 |
-| **Linting** | ESLint + TypeScript ESLint |
-| **Styling** | Emotion + MUI System |
-| **Icons** | MUI Icons + Material Icons |
+### 🚀 Core Technologies
+| Categoría | Tecnología | Versión | Propósito |
+|-----------|------------|---------|----------|
+| **Frontend** | React | 19.2.0 | Biblioteca principal UI |
+| **Language** | TypeScript | 5.9.3 | Tipado estático y desarrollo |
+| **Build Tool** | Vite | 6.0.0 | Bundler y development server |
+| **Module System** | ES Modules | - | Sistema de módulos moderno |
+
+### 🎨 UI & Styling Framework
+| Librería | Versión | Uso Específico |
+|----------|---------|---------------|
+| **@mui/material** | 7.3.7 | Componentes UI principales |
+| **@mui/icons-material** | 7.3.7 | Iconografía Material Design |
+| **@mui/x-data-grid** | 8.27.0 | Tablas avanzadas con filtros |
+| **@emotion/react** | 11.14.0 | CSS-in-JS engine |
+| **@emotion/styled** | 11.14.1 | Styled components |
+
+### 🔄 State Management & Routing
+| Tecnología | Implementación | Archivos Clave |
+|------------|----------------|----------------|
+| **React Router** | 7.13.0 | `BrowserRouter`, `Routes`, `Navigate` |
+| **Context API** | Nativo React | `AuthProvider`, `ColorModeProvider` |
+| **Custom Hooks** | Patrón personalizado | `useAuth`, `usePermissions`, `useColorMode` |
+| **LocalStorage** | API nativa | Persistencia de sesión y preferencias |
+
+### 🔧 Development Tools
+| Herramienta | Versión | Configuración |
+|-------------|---------|---------------|
+| **ESLint** | 9.39.1 | Linting con reglas TypeScript |
+| **TypeScript ESLint** | 8.48.0 | Reglas específicas TS |
+| **React Hooks ESLint** | 7.0.1 | Validación hooks |
+| **React Refresh** | 0.4.24 | Hot Module Replacement |
+
+### 🏗️ Patrones de Arquitectura Implementados
+
+#### 🎯 **Custom Hooks Pattern**
+```typescript
+// useAuth.ts - Gestión de autenticación
+export function useAuth(): AuthContextValue
+
+// usePermissions.ts - Control de permisos por rol
+export function usePermissions() {
+  const canWrite = role === "admin";
+}
+
+// useColorMode.ts - Gestión tema claro/oscuro
+export function useColorMode(): ColorModeContextValue
+```
+
+#### 📡 **Service Layer Pattern**
+```typescript
+// productService.ts
+export async function getProducts(): Promise<Product[]>
+export async function createProduct(data: CreateProduct): Promise<Product>
+export async function updateProduct(id: string, data: Partial<Product>): Promise<Product>
+export async function deleteProduct(id: string): Promise<void>
+
+// orderService.ts
+export async function getOrders(): Promise<Order[]>
+export async function getOrdersByCustomerId(customerId: string): Promise<Order[]>
+
+// customerService.ts  
+export async function getCustomers(): Promise<Customer[]>
+export async function getCustomerById(id: string): Promise<Customer | null>
+```
+
+#### 🔐 **Authentication & Authorization**
+```typescript
+// Roles de usuario
+type Role = "admin" | "viewer";
+
+// Context de autenticación
+interface AuthContextValue {
+  isAuthenticated: boolean;
+  user: AuthUser | null;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+}
+
+// Rutas protegidas
+<Route element={<ProtectedRoute />}>
+  <Route element={<DashboardLayout />}>
+    // Rutas privadas...
+  </Route>
+</Route>
+```
+
+#### 🎨 **Theming System**
+```typescript
+// Sistema de temas dinámico
+type ColorMode = "light" | "dark";
+
+// Detección automática de preferencias del sistema
+function getSystemMode(): ColorMode {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches 
+    ? "dark" : "light";
+}
+
+// Persistencia en localStorage
+const STORAGE_KEY = "ui_color_mode_v1";
+```
 
 ## 🚀 Instalación y Uso
 
@@ -191,13 +309,70 @@ src/
 
 ## ✨ Características Avanzadas
 
-- 🌙 **Modo oscuro/claro** con detección automática del sistema
-- 📱 **Diseño responsive** para móvil y desktop
-- ⚡ **Carga optimizada** con Vite y code splitting
-- 🔍 **Búsqueda y filtros** en tiempo real  
-- 📊 **Gráficos y tablas** interactivas con MUI DataGrid
-- 🎨 **Sistema de diseño** consistente con Material Design
-- 🚀 **Rendimiento optimizado** con React 19 y TypeScript
+### 🌙 **Sistema de Temas Inteligente**
+- **Detección automática** del modo preferido del sistema
+- **Persistencia** de preferencias del usuario
+- **Transiciones fluidas** entre modo claro y oscuro
+- **Adaptación de componentes** MUI automática
+
+### 📱 **Diseño Responsive Avanzado**
+- **Breakpoints MUI**: xs, sm, md, lg, xl
+- **Drawer responsive**: sidebar colapsa en móvil
+- **Hamburger menu** en dispositivos pequeños
+- **Grid adaptativo** para métricas y cards
+
+### ⚡ **Optimización de Rendimiento**
+- **Vite HMR**: Hot Module Replacement ultrarrápido
+- **Tree shaking**: Eliminación de código no usado
+- **Code splitting**: Carga bajo demanda
+- **React.memo**: Prevención de re-renders innecesarios
+- **useMemo/useCallback**: Optimización de cálculos
+
+### 🔍 **Sistema de Búsqueda y Filtros**
+```typescript
+// Filtros en tiempo real
+const filteredProducts = products.filter(product => {
+  const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
+  const matchesStatus = statusFilter === "all" || product.status === statusFilter;
+  return matchesSearch && matchesStatus;
+});
+```
+
+### 📊 **DataGrid Avanzado (MUI X)**
+- **Paginación**: Configuración de filas por página
+- **Ordenamiento**: Por cualquier columna
+- **Acciones**: Ver, Editar, Eliminar por fila
+- **Responsive columns**: Adaptación automática
+- **Loading states**: Skeleton loading
+
+### 🔐 **Seguridad y Autenticación**
+- **Role-Based Access Control (RBAC)**
+- **Protected Routes**: Redirect automático si no authenticated
+- **Session persistence**: Mantiene sesión tras reload
+- **Logout automático**: Limpieza de estado
+
+### 🎨 **Sistema de Diseño Consistente**
+```typescript
+// Tema personalizado MUI
+const theme = createTheme({
+  palette: { mode },
+  shape: { borderRadius: 12 },
+  typography: {
+    fontFamily: ["Inter", "system-ui", "Segoe UI", "Roboto", "Arial"].join(",")
+  },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          border: mode === "light" 
+            ? "1px solid rgba(0,0,0,0.08)" 
+            : "1px solid rgba(255,255,255,0.10)"
+        }
+      }
+    }
+  }
+});
+```
 
 ## 🚀 Deploy y Producción
 
