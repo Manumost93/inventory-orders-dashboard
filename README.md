@@ -407,26 +407,18 @@ Las contribuciones son bienvenidas. Para cambios importantes:
 
 ---
 
-**Desarrollado con ❤️ por Manuel Honrado**
+## 🌟 Demo en Vivo
 
-This project was built as a portfolio project to demonstrate frontend architecture skills, state management, and real-world UI patterns.
+**🔗 [Ver Demo en Vivo](https://inventory-orders-dashboard.vercel.app)**
 
-## 👨‍💻 Author
+### Credenciales de prueba:
+- **Email**: `demo@company.com`  
+- **Password**: `admin123`
 
-**Manuel Honrado**  
-Frontend Developer  
+---
 
-LinkedIn: www.linkedin.com/in/manuel-honrado-desarrollador
-GitHub: https://github.com/Manumost93/inventory-orders-dashboard.git
-Live demo: https://inventory-orders-dashboard.vercel.app
-
-## 📅 Year
-
-2026
-
-## 📄 License
-
-This project is for educational and portfolio purposes.
+**💻 Desarrollado con ❤️ por Manuel Honrado**  
+*Este proyecto demuestra habilidades de arquitectura frontend, gestión de estado y patrones UI del mundo real.*
 
 
 ```
