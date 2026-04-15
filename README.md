@@ -1,103 +1,238 @@
-# React + TypeScript + Vite
+# 📊 Inventory & Orders Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Dashboard de Inventario y Órdenes** - Una aplicación web moderna para la gestión empresarial de productos, órdenes y clientes.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 👨‍💻 Autor
 
-## React Compiler
+**Manuel Honrado** - Desarrollador Full Stack  
+📧 [manuel.honrado@example.com](mailto:manuel.honrado@example.com)  
+🔗 [LinkedIn](https://linkedin.com/in/manuelhonrado) | [GitHub](https://github.com/Manumost93)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📷 Capturas de pantalla
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Dashboard Principal
+![Dashboard Principal](./docs/images/dashboard-overview.png)
+*Vista general del dashboard con métricas de negocio, gráficos de órdenes y snapshot del inventario*
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Gestión de Productos
+![Gestión de Productos](./docs/images/products-management.png)
+*Módulo de gestión de productos con tabla filtrable y funcionalidades CRUD*
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Módulo de Creación
+![Añadir Producto](./docs/images/add-product-modal.png)
+*Modal para añadir nuevos productos al inventario*
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🎯 ¿Qué es este proyecto?
+
+Esta aplicación es un **Dashboard completo de gestión empresarial** diseñado para pequeñas y medianas empresas que necesitan:
+
+- 📈 **Monitorear métricas de negocio** en tiempo real
+- 🛍️ **Gestionar inventario de productos** 
+- 📦 **Seguimiento de órdenes y pedidos**
+- 👥 **Administrar base de clientes**
+- 💰 **Control de ingresos y ventas**
+
+## 🚀 Funcionalidades Principales
+
+### 📊 Dashboard de Métricas
+- **Ingresos totales** con suma automática de órdenes
+- **Contador de órdenes** por estado (pendiente, pagado, enviado)  
+- **Productos activos** en inventario
+- **Alertas de stock bajo** (productos con stock < 10)
+- **Top customers** por valor de compras
+- **Últimas 5 órdenes** con detalles
+
+### 🛍️ Gestión de Productos
+- **CRUD completo**: Crear, leer, actualizar y eliminar productos
+- **Búsqueda y filtros** avanzados
+- **Gestión de stock** en tiempo real
+- **Estados de productos** (activo/inactivo)
+- **Códigos SKU** únicos por producto
+
+### 📦 Sistema de Órdenes  
+- **Seguimiento de pedidos** por estado
+- **Historial completo** de transacciones
+- **Vinculación con clientes** y productos
+- **Cálculos automáticos** de totales
+
+### 👥 Gestión de Clientes
+- **Base de datos de clientes** completa
+- **Historial de compras** por cliente
+- **Métricas de cliente** (valor total, órdenes)
+
+## 🔧 Funcionalidad de la API/Sistema
+
+El proyecto implementa un **sistema de gestión de datos robusto** con:
+
+### 📡 API Simulada (LocalStorage)
+```typescript
+// Servicios principales
+- ProductService: Gestión completa de productos
+- OrderService: Manejo de órdenes y estados  
+- CustomerService: Administración de clientes
+- Storage: Capa de persistencia local
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🔄 Arquitectura de Datos
+```typescript
+// Modelos de datos tipados
+interface Product {
+  id: string;
+  name: string;
+  sku: string;
+  price: number;
+  stock: number;
+  status: 'active' | 'inactive';
+  createdAt: Date;
+}
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+interface Order {
+  id: string;
+  customerId: string;
+  products: OrderProduct[];
+  total: number;
+  status: 'pending' | 'paid' | 'shipped';
+  createdAt: Date;
+}
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+interface Customer {
+  id: string;
+  name: string;
+  email: string;
+  totalOrders: number;
+  totalSpent: number;
+}
+```
 
+### 🛡️ Sistema de Autenticación
+- **Login seguro** con validación de credenciales
+- **Rutas protegidas** con React Router
+- **Gestión de estado** con Context API
+- **Persistencia de sesión** automática
 
-# Inventory & Orders Dashboard (React SPA)
+## 🛠️ Stack Tecnológico
 
-A backoffice-style Single Page Application built with React + TypeScript following clean architecture and enterprise frontend patterns.
+| Categoría | Tecnologías |
+|-----------|-------------|
+| **Frontend** | React 19.2, TypeScript 5.9 |
+| **UI Framework** | Material-UI v7 (MUI) |
+| **Routing** | React Router v7 |
+| **Estado Global** | Context API + useReducer |
+| **Build Tool** | Vite 6.0 |
+| **Linting** | ESLint + TypeScript ESLint |
+| **Styling** | Emotion + MUI System |
+| **Icons** | MUI Icons + Material Icons |
 
-## ✨ Features
+## 🚀 Instalación y Uso
 
-- Role-based authentication (admin / viewer)
-- CRUD operations for products, orders, and customers
-- Relational data modeling using IDs
-- Dashboard with KPIs and loading skeletons
-- Persistent storage layer abstraction
-- Dark mode with system preference detection
-- Protected routes with React Router
-- Component-driven UI with Material UI
+### Prerrequisitos
+- ✅ Node.js 18+ 
+- ✅ npm o yarn instalado
 
-## 🧠 Tech Stack
+### 1️⃣ Clonación del repositorio
+```bash
+git clone https://github.com/Manumost93/inventory-orders-dashboard.git
+cd inventory-orders-dashboard
+```
 
-- React
-- TypeScript
-- Vite
-- Material UI
-- React Router
-- Context API
-- LocalStorage persistence
+### 2️⃣ Instalación de dependencias
+```bash
+npm install
+```
 
-## 🎯 Purpose
+### 3️⃣ Iniciar servidor de desarrollo
+```bash
+npm run dev
+```
+
+La aplicación estará disponible en `http://localhost:5173`
+
+### 4️⃣ Credenciales de acceso
+```
+Usuario: demo@company.com
+Contraseña: admin123
+```
+
+## 📝 Scripts Disponibles
+
+```bash
+npm run dev        # Servidor de desarrollo
+npm run build      # Compilar para producción  
+npm run preview    # Vista previa de la build
+npm run lint       # Linter de código
+npm run typecheck  # Verificación de tipos TS
+```
+
+## 🏗️ Arquitectura del Proyecto
+
+```
+src/
+├── app/
+│   ├── components/     # Componentes reutilizables
+│   ├── context/        # Context API (Auth, Theme)
+│   ├── hooks/          # Custom hooks  
+│   ├── layouts/        # Layouts principales
+│   ├── pages/          # Páginas de la aplicación
+│   ├── routes/         # Configuración de rutas
+│   ├── services/       # Servicios de API
+│   ├── theme/          # Configuración de Material-UI
+│   ├── types/          # Definiciones TypeScript
+│   └── ui/             # Componentes de UI base
+├── assets/             # Recursos estáticos
+├── index.css          # Estilos globales
+└── main.tsx           # Punto de entrada
+```
+
+## ✨ Características Avanzadas
+
+- 🌙 **Modo oscuro/claro** con detección automática del sistema
+- 📱 **Diseño responsive** para móvil y desktop
+- ⚡ **Carga optimizada** con Vite y code splitting
+- 🔍 **Búsqueda y filtros** en tiempo real  
+- 📊 **Gráficos y tablas** interactivas con MUI DataGrid
+- 🎨 **Sistema de diseño** consistente con Material Design
+- 🚀 **Rendimiento optimizado** con React 19 y TypeScript
+
+## 🚀 Deploy y Producción
+
+El proyecto está optimizado para deployment en:
+- ✅ **Vercel** (recomendado)
+- ✅ **Netlify** 
+- ✅ **AWS S3 + CloudFront**
+- ✅ **GitHub Pages**
+
+```bash
+# Build para producción
+npm run build
+
+# Archivos generados en ./dist
+```
+
+---
+
+## 📄 Licencia
+
+MIT License - Ver [LICENSE](LICENSE) para más detalles
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Para cambios importantes:
+
+1. Fork del proyecto
+2. Crear feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit de cambios (`git commit -m 'Add: AmazingFeature'`)
+4. Push al branch (`git push origin feature/AmazingFeature`) 
+5. Abrir un Pull Request
+
+---
+
+**Desarrollado con ❤️ por Manuel Honrado**
 
 This project was built as a portfolio project to demonstrate frontend architecture skills, state management, and real-world UI patterns.
 
