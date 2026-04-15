@@ -1,44 +1,62 @@
-# 📷 Instrucciones para reemplazar imágenes placeholder
+# � Cómo añadir las imágenes reales al README
 
-## ✅ Estado actual:
-- ✅ Carpeta `docs/images/` creada
-- ✅ Archivos placeholder creados
-- ✅ Referencias configuradas en el README
+## ✅ Problema solucionado
+- ❌ Eliminé los archivos placeholder que causaban enlaces rotos
+- ✅ README actualizado con descripciones textuales
+- ✅ Instrucciones claras para añadir las imágenes
 
-## 🔄 Para reemplazar con tus capturas reales:
+## 📝 Pasos para añadir tus capturas de pantalla:
 
-### Paso 1: Guardar tus capturas
-Guarda las 3 imágenes que me enviaste con estos nombres exactos:
+### 1. Preparar las imágenes
+Guarda tus 3 capturas con estos nombres **exactos**:
+- `dashboard-overview.png` 
+- `products-management.png`
+- `add-product-modal.png`
 
-1. **`dashboard-overview.png`** - Captura del dashboard principal
-   - Dashboard con métricas de ingresos ($459.40)
-   - Total de órdenes (3), productos activos (2), stock bajo (5)
-   - Gráfico "Orders by Status" y "Top Customer"
+### 2. Copiar al repositorio
+Coloca los archivos en: `docs/images/`
 
-2. **`products-management.png`** - Vista de la página de productos  
-   - Tabla con Classic Burger, Cheese Burger, Vegan Burger
-   - Botones de búsqueda, filtros y "ADD PRODUCT"
-
-3. **`add-product-modal.png`** - Modal de añadir producto
-   - Formulario con campos "Product Name" y "Price"
-   - Botones "CANCEL" y "CREATE"
-
-### Paso 2: Reemplazar archivos placeholder
-Reemplaza estos archivos en: `docs/images/`
-- `docs/images/dashboard-overview.png`
-- `docs/images/products-management.png`
-- `docs/images/add-product-modal.png`
-
-### Paso 3: ¡Listo!
-Las referencias en el README quedarán automáticamente configuradas.
-
-## 📁 Estructura final:
+### 3. Estructura final
 ```
 docs/
 └── images/
-    ├── dashboard-overview.png (TUS CAPTURAS AQUÍ)
-    ├── products-management.png (TUS CAPTURAS AQUÍ)  
-    └── add-product-modal.png (TUS CAPTURAS AQUÍ)
+    ├── dashboard-overview.png (TU CAPTURA AQUÍ)
+    ├── products-management.png (TU CAPTURA AQUÍ)
+    └── add-product-modal.png (TU CAPTURA AQUÍ)
 ```
 
-**💡 Tip**: Asegúrate de que los nombres de archivo sean exactamente iguales (incluyendo minúsculas y guiones).
+### 4. Activar las imágenes en el README
+Una vez que hayas colocado las imágenes, reemplaza esta sección del README:
+
+```markdown
+## 📷 Capturas de pantalla
+
+> 📝 **Instrucciones para añadir imágenes**...
+```
+
+**Por esta:**
+
+```markdown
+## 📷 Capturas de pantalla
+
+### Dashboard Principal
+![Dashboard Principal](./docs/images/dashboard-overview.png)
+*Vista general del dashboard con métricas de negocio, gráficos de órdenes y snapshot del inventario*
+
+### Gestión de Productos
+![Gestión de Productos](./docs/images/products-management.png)
+*Módulo de gestión de productos con tabla filtrable y funcionalidades CRUD*
+
+### Módulo de Creación
+![Añadir Producto](./docs/images/add-product-modal.png)
+*Modal para añadir nuevos productos al inventario*
+```
+
+## 🚀 Hacer commit de los cambios
+```bash
+git add docs/images/
+git commit -m "feat: Añadir capturas de pantalla del proyecto"
+git push origin main
+```
+
+**¡Y listo! Las imágenes aparecerán perfectamente en GitHub** ✨
